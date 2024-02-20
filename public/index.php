@@ -1,6 +1,6 @@
 <?php
 
-$app_dir = 'kenjis.000webhostapp.com';
+$server_app_dir = 'kenjis.000webhostapp.com';
 
 function is_disabled(string $func) {
     $disabled = array_map(
@@ -9,6 +9,10 @@ function is_disabled(string $func) {
     );
 
     return in_array($func, $disabled, true);
+}
+
+function is_local() {
+    return $_SERVER['SERVER_NAME'] === 'localhost';
 }
 
 // Check PHP version.
@@ -42,10 +46,10 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-if (is_disabled('putenv')) {
-    require FCPATH . "../$app_dir/app/Config/Paths.php";
-} else {
+if (is_local()) {
     require FCPATH . '../app/Config/Paths.php';
+} else {
+    require FCPATH . "../$server_app_dir/app/Config/Paths.php";
 }
 // ^^^ Change this line if you move your application folder
 
