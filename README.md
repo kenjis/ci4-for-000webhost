@@ -13,13 +13,13 @@ SetEnv CI_ENVIRONMENT development
 
 ## Folder Structure
 
-Upload your project files to the `foo.000webhost.com` folder.
+Upload your project files to the `foo.000webhostapp.com` folder.
 
 Upload the contents of the project's `public` folder to `pubic_html`.
 
 On the 000webhost:
 ```
-    ├── foo.000webhost.com/ (for the application)
+    ├── foo.000webhostapp.com/ (for the application)
     │       ├── app/
     │       ├── vendor/
     │       └── writable/
