@@ -1,5 +1,16 @@
 <?php
 
+$app_dir = 'kenjis.000webhostapp.com';
+
+function is_disabled(string $func) {
+    $disabled = array_map(
+        function ($value) { return trim($value); }, 
+        explode(',', ini_get('disable_functions'))
+    );
+
+    return in_array($func, $disabled, true);
+}
+
 // Check PHP version.
 $minPhpVersion = '7.4'; // If you update this, don't forget to update `spark`.
 if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
@@ -31,7 +42,11 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../app/Config/Paths.php';
+if (is_disabled('putenv')) {
+    require FCPATH . "../$app_dir/app/Config/Paths.php";
+} else {
+    require FCPATH . '../app/Config/Paths.php';
+}
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();
@@ -40,8 +55,10 @@ $paths = new Config\Paths();
 require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 // Load environment settings from .env files into $_SERVER and $_ENV
-require_once SYSTEMPATH . 'Config/DotEnv.php';
-(new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
+if (! is_disabled('putenv')) {
+    require_once SYSTEMPATH . 'Config/DotEnv.php';
+    (new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
+}
 
 // Define ENVIRONMENT
 if (! defined('ENVIRONMENT')) {
