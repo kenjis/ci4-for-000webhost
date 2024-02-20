@@ -1,3 +1,9 @@
+# HTID:22937887: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:22937887:
+
+#SetEnv CI_ENVIRONMENT development
+
 # Disable directory browsing
 Options -Indexes
 
