@@ -11,6 +11,15 @@ If you want to set environment variables, use `public_html/.htaccess`:
 SetEnv CI_ENVIRONMENT development
 ```
 
+### Disabled Functions
+
+The following functions are disabled on 000webhost.com.
+
+mail, putenv, system, show_source, exec, shell_exec, proc_open, passthru,
+set_time_limit, ini_restore, mysql_list_dbs, ini_alter, dl, pfsockopen, openlog,
+syslog, symlink, link, chgrp, leak, popen, escapeshellcmd, apache_child_terminate,
+apache_getenv, apache_note, apache_setenv, virtual, mb_send_mail
+
 ## Folder Structure
 
 Upload your project files to the `foo.000webhostapp.com` folder.
